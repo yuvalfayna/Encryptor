@@ -8,6 +8,9 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class FilesOperations {
+    // ********************Encryption Methods********************
+
+    // Method of user input path of unencrypted file
     public static File UserPathFileReaderEncryption() {
         Scanner pathReader = new Scanner(System.in);
         boolean success = false;
@@ -24,7 +27,8 @@ public class FilesOperations {
         return null;
     }
 
-    public static int CreateKey(File originfile) {
+    // Method of creating key file for encrypted file
+    public static int CreateKeyFile(File originfile) {
         Random random = new Random();
         int key = random.nextInt(100, 300);
         try {
@@ -48,10 +52,11 @@ public class FilesOperations {
         return 0;
     }
 
+    // Method of creating encrypted file
     public static File CreateEncryptedFile(File originfile) {
         try {
             String extension = FilenameUtils.getExtension(originfile.getPath());
-            File encryptedfile = new File(originfile.getParent() + "\\" + originfile.getName()  + "_encrypted." + extension);
+            File encryptedfile = new File(originfile.getParent() + "\\" + originfile.getName() + "_encrypted." + extension);
             if (encryptedfile.createNewFile()) {
                 System.out.println("Encrypted File Name - " + encryptedfile.getName());
                 System.out.println("Encrypted File Path - " + encryptedfile.getParent());
@@ -66,24 +71,9 @@ public class FilesOperations {
         }
         return null;
     }
+    //********************Decryption Methods********************
 
-    public static File CreateDecryptedFile(File originfile) {
-        try {
-            String extension = FilenameUtils.getExtension(originfile.getPath());
-            File decryptedfile = new File(originfile.getParent() + "\\"  + originfile.getName() + "_decrypted." + extension);
-            if (decryptedfile.createNewFile()) {
-                System.out.println("Decrypted File Name - " + decryptedfile.getName());
-                System.out.println("Decrypted File Path - " + decryptedfile.getParent());
-                return decryptedfile;
-            } else {
-                System.out.println("File already decrypted");
-            }
-        } catch (Exception e) {
-            System.out.println("Error = " + e.getMessage());
-        }
-        return null;
-    }
-
+    // Method of user input path of encrypted file
     public static File UserPathFileReaderDecryption() {
         Scanner pathReader = new Scanner(System.in);
         boolean success = false;
@@ -99,14 +89,14 @@ public class FilesOperations {
         }
         return null;
     }
-
+    // Method of reading Key value of encrypted file
     public static int KeyReader() {
         Scanner scanner = new Scanner(System.in);
         boolean success = false;
         while (!success) {
             System.out.println("Please enter the path of the file's key you want to decrypt (include the file extension).");
             File file = new File(scanner.nextLine());
-            if (file.exists()&& file.isFile()) {
+            if (file.exists() && file.isFile()) {
                 success = true;
                 try {
                     scanner = new Scanner(file);
@@ -120,4 +110,26 @@ public class FilesOperations {
         }
         return 0;
     }
+
+    // Method of creating decrypted file
+    public static File CreateDecryptedFile(File originfile) {
+        try {
+            String extension = FilenameUtils.getExtension(originfile.getPath());
+            File decryptedfile = new File(originfile.getParent() + "\\" + originfile.getName() + "_decrypted." + extension);
+            if (decryptedfile.createNewFile()) {
+                System.out.println("Decrypted File Name - " + decryptedfile.getName());
+                System.out.println("Decrypted File Path - " + decryptedfile.getParent());
+                return decryptedfile;
+            } else {
+                System.out.println("File already decrypted");
+            }
+        } catch (Exception e) {
+            System.out.println("Error = " + e.getMessage());
+        }
+        return null;
+    }
 }
+
+
+
+

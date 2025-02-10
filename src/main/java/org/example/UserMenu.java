@@ -3,6 +3,7 @@ package org.example;
 import java.util.Scanner;
 
 public class UserMenu {
+    // Convenient user menu method
     public static void Menu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello");

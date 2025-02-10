@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class EncryptionDecryptionAlgorithm {
+
+    // Method of encryption algorithm
     public static void EncryptionAlgorithm(File originfile) {
-        int key = FilesOperations.CreateKey(originfile);
+        int key = FilesOperations.CreateKeyFile(originfile);
         File encryptedfile = FilesOperations.CreateEncryptedFile(originfile);
         try {
             Scanner scanner = new Scanner(originfile);
@@ -25,6 +27,8 @@ public class EncryptionDecryptionAlgorithm {
             System.out.println("Error = " + e.getMessage());
         }
     }
+
+    // Method of decryption algorithm
     public static void DecryptionAlgorithm(File originfile){
         int key = FilesOperations.KeyReader();
         File decryptedFile = FilesOperations.CreateDecryptedFile(originfile);
